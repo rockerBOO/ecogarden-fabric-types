@@ -3092,6 +3092,16 @@ interface IObjectOptions {
 	absolutePositioned?: boolean;
 
 	/**
+	 * Not used by fabric, used in Ecogarden
+	 */
+	id?: string;
+
+	/**
+	 * Not used by fabric, used in Ecogarden
+	 */
+	subtype?: string;
+
+	/**
 	 * Not used by fabric, just for convenience
 	 */
 	name?: string;
@@ -4037,7 +4047,7 @@ export class Polygon extends Polyline {
 	 * @param points Array of points
 	 * @param [options] Options object
 	 */
-	constructor(points: Array<{ x: number; y: number }>, options?: IPolylineOptions);
+	constructor(points: (Point | { x: number, y: number })[], options?: IPolylineOptions);
 	/**
 	 * Returns Polygon instance from an SVG element
 	 * @param element Element to parse
@@ -4055,7 +4065,7 @@ interface IPolylineOptions extends IObjectOptions {
 	/**
 	 * Points array
 	 */
-	points?: Point[];
+	points?: (Point | { x: number, y: number })[];
 }
 export interface Polyline extends IPolylineOptions { }
 export class Polyline extends Object {
