@@ -4059,7 +4059,7 @@ export class Polygon extends Polyline {
 	 * @param object Object to create an instance from
 	 * @param {function} [callback] invoked with new instance as first argument
 	 */
-	static fromObject<T>(object: T, callback: (object: T) => T): void;
+	static fromObject<T>(object: T, callback: (object: T) => void): void;
 }
 
 interface IPolylineOptions extends IObjectOptions {
@@ -6368,8 +6368,10 @@ interface IUtilMisc {
 	 * Multiply matrix A by matrix B to nest transformations
 	 * @param  a First transformMatrix
 	 * @param  b Second transformMatrix
+	 * @param  {Boolean} is2x2 flag to multiply matrices as 2x2 matrices
+	 * @return {Array} The product of the two transform matrices
 	 */
-	multiplyTransformMatrices(a: number[], b: number[]): number[];
+	multiplyTransformMatrices(a: readonly number[], b: readonly number[], is2x2?: boolean): readonly number[];
 
 	/**
 	 * Decomposes standard 2x2 matrix into transform componentes
