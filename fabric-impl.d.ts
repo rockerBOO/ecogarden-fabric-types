@@ -3198,7 +3198,7 @@ export class Object {
 	 * Returns an object representation of an instance
 	 * @param [propertiesToInclude] Any properties that you might want to additionally include in the output
 	 */
-	toObject(propertiesToInclude?: string[]): object;
+	toObject(propertiesToInclude?: string[]): IObjectOptions;
 
 	/**
 	 * Returns (dataless) object representation of an instance
@@ -4057,8 +4057,9 @@ export class Polygon extends Polyline {
 	/**
 	 * Returns fabric.Polygon instance from an object representation
 	 * @param object Object to create an instance from
+	 * @param {function} [callback] invoked with new instance as first argument
 	 */
-	static fromObject(object: object): Polygon;
+	static fromObject<T>(object: T, callback: (object: T) => T): void;
 }
 
 interface IPolylineOptions extends IObjectOptions {
@@ -5900,11 +5901,11 @@ interface IUtilAnimationOptions {
 	/**
 	 * Callback; invoked on every value change
 	 */
-	onChange?: (value: number) => void;
+	onChange?: (endValue: number, finished: number, timePercentage: number) => void;
 	/**
 	 * Callback; invoked when value change is completed
 	 */
-	onComplete?: Function;
+	onComplete?: (endValue: number, finished: number, timePercentage: number) => void;
 	/**
 	 * Easing function
 	 */
