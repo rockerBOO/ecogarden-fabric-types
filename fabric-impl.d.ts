@@ -2102,6 +2102,14 @@ export class Canvas {
 	 */
 	_onObjectAdded(obj: Object): void;
 	/**
+	 * Method that defines the actions when mouse is released on canvas.
+	 * The method resets the currentTransform parameters, store the image corner
+	 * position in the image object and render the canvas on top.
+	 * @private
+	 * @param {Event} e Event object fired on mouseup
+	 */
+	__onMouseUp(e: Event): void;
+	/**
 	 * Resets the current transform to its original values and chooses the type of resizing based on the event
 	 * @private
 	 */
@@ -4103,8 +4111,9 @@ export class Polyline extends Object {
 	/**
 	 * Returns fabric.Polyline instance from an object representation
 	 * @param object Object to create an instance from
+	 * @param {function} [callback] invoked with new instance as first argument
 	 */
-	static fromObject(object: object): Polyline;
+	static fromObject<T>(object: T, callback: (object: T) => void): void;
 }
 
 interface IRectOptions extends IObjectOptions {
@@ -6241,7 +6250,7 @@ interface IUtilMisc {
 	 * @param  t The transform
 	 * @param  [ignoreOffset] Indicates that the offset should not be applied
 	 */
-	transformPoint(p: Point | { x: number, y: number }, t: number[], ignoreOffset?: boolean): Point;
+	transformPoint(p: Point | { x: number, y: number }, t: readonly number[], ignoreOffset?: boolean): Point;
 
 	/**
 	 * Invert transformation t
