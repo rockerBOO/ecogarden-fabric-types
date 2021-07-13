@@ -1,5 +1,5 @@
 # Installation
-> `npm install --save @types/fabric`
+> `npm install --save git+https://rockerBOO/ecogarden-fabric-types.git#main`
 
 # Summary
 This package contains type definitions for FabricJS (http://fabricjs.com/).
