@@ -1,5 +1,12 @@
 # Installation
-> `npm install --save @types/fabric`
+
+> `npm install --save-dev git+https://github.com/rockerBOO/ecogarden-fabric-types.git#main`
+
+> `yarn add --dev git+https://github.com/rockerBOO/ecogarden-fabric-types.git#main`
+
+This implements @types/fabric types with fixes. Was fustrated with how inaccurate the types were, and how slow it was to get these upstreamed in a giant mega repo.
+
+If you maintain the @types/fabric on DefinitelyTyped, feel free to upstream the appropriate changes from this repo.
 
 # Summary
 This package contains type definitions for FabricJS (http://fabricjs.com/).
