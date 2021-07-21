@@ -42,7 +42,7 @@ export function createSVGFontFacesMarkup(objects: Object[]): string;
  */
 export function loadSVGFromString(
 	string: string,
-	callback: (results: Object[], options: any) => void,
+	callback: (results: Object[], options: IObjectOptions) => void,
 	reviver?: Function,
 ): void;
 /**
@@ -1485,16 +1485,16 @@ export class StaticCanvas {
 	/**
 	 * Returns JSON representation of canvas
 	 * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
-	 * @return {String} JSON string
+	 * @return {Object} JSON object 
 	 */
-	toJSON(propertiesToInclude?: string[]): string;
+	toJSON(propertiesToInclude?: string[]): { version: string, objects: object[] };
 
 	/**
 	 * Returns object representation of canvas
 	 * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
 	 * @return {Object} object representation of an instance
 	 */
-	toObject(propertiesToInclude?: string[]): object;
+	toObject(propertiesToInclude?: string[]): { version: string, objects: object[] };
 
 	/**
 	 * Returns dataless object representation of canvas
@@ -1596,9 +1596,11 @@ export class StaticCanvas {
 
 	/**
 	 * Exports canvas element to a dataurl image. Note that when multiplier is used, cropping is scaled appropriately
-	 * @param [options] Options object
+	 * @param {IDataUrlOptions} options Data url options
+	 * @param {String} format Image format. 'jpeg', 'png', and in some browsers 'webp' 
+	 * @param {Number} quality Set the image quality (for lossy, jpeg). Number range 0 to 1. 
 	 */
-	toDataURL(options?: IDataURLOptions): string;
+	toDataURL(options?: IDataURLOptions, format?: "jpeg" | "png" | "webp", quality?: number): string;
 
 	/**
 	 * Returns JSON representation of canvas
@@ -2747,6 +2749,11 @@ interface IObjectOptions {
 	 * Object skew factor (vertical)
 	 */
 	skewY?: number;
+
+	/**
+	 * Size of object's controlling corners when touch interaction is detected 
+	 */
+	touchCornerSize?: number;
 
 	/**
 	 * Size of object's controlling corners (in pixels)
@@ -6313,7 +6320,7 @@ interface IUtilMisc {
 	 * @param elements SVG elements to group
 	 * @param [options] Options object
 	 */
-	groupSVGElements(elements: any[], options?: any, path?: string): Object | Group;
+	groupSVGElements(elements: Object[], options?: IObjectOptions & IGroupOptions, path?: string): Object | Group;
 
 	/**
 	 * Clear char widths cache for the given font family or all the cache if no
