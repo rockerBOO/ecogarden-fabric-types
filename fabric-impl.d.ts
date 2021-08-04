@@ -2681,14 +2681,14 @@ interface IObjectOptions {
 	type?: string;
 
 	/**
-	 * Horizontal origin of transformation of an object (one of "left", "right", "center")
+	 * Horizontal origin of transformation of an object (one of "left", "right", "center", or number 0-1)
 	 */
-	originX?: string;
+	originX?: string | number;
 
 	/**
-	 * Vertical origin of transformation of an object (one of "top", "bottom", "center")
+	 * Vertical origin of transformation of an object (one of "top", "bottom", "center", or number 0-1)
 	 */
-	originY?: string;
+	originY?: string | number;
 
 	/**
 	 * Top position of an object. Note that by default it's relative to object center. You can change this by setting originY={top/center/bottom}
