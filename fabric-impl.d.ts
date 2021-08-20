@@ -4835,6 +4835,8 @@ interface ITextOptions extends TextOptions {
 	 * Exposes underlying hidden text area
 	 */
 	hiddenTextarea?: HTMLTextAreaElement;
+
+	hiddenTextareaAppendTo?: HTMLTextAreaElement;
 }
 export interface IText extends ITextOptions { }
 export class IText extends Text {
