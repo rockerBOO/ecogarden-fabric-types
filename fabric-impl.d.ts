@@ -4844,7 +4844,7 @@ interface ITextOptions extends TextOptions {
 	 * @type HTMLElement
 	 * @default
 	 */
-	hiddenTextareaContainer?: HTMLElement;
+	hiddenTextareaContainer: HTMLElement | null;
 }
 export interface IText extends ITextOptions { }
 export class IText extends Text {
