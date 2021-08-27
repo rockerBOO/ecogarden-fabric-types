@@ -4836,7 +4836,15 @@ interface ITextOptions extends TextOptions {
 	 */
 	hiddenTextarea?: HTMLTextAreaElement;
 
-	hiddenTextareaAppendTo?: HTMLTextAreaElement;
+	/**
+	 * DOM container to append the hiddenTextarea.
+	 * An alternative to attaching to the document.body.
+	 * Useful to reduce laggish redraw of the full document.body tree and
+	 * also with modals event capturing that won't let the textarea take focus.
+	 * @type HTMLElement
+	 * @default
+	 */
+	hiddenTextareaContainer?: HTMLElement;
 }
 export interface IText extends ITextOptions { }
 export class IText extends Text {
