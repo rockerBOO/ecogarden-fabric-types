@@ -6712,6 +6712,13 @@ export class Control {
 	cursorStyle: string;
 
 	/**
+	 * Defines the line width the Context2D will use to draw a stroke around the control.
+	 * @type {Number}
+	 * @default 1
+	 */
+	lineWidth: number;
+
+	/**
 	 * If controls has an offsetY or offsetX, draw a line that connects
 	 * the control to the bounding box
 	 * @default false
