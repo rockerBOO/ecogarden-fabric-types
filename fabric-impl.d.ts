@@ -323,10 +323,16 @@ interface ICollection<T> {
 interface IObservable<T> {
 	/**
 	 * Observes specified event
-	 * @param eventName Event name (eg. 'after:render')
+	 * @param eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': handler, 'selection:cleared': handler})
 	 * @param handler Function that receives a notification when an event of the specified type occurs
 	 */
-	on(eventName: string, handler: (e: IEvent) => void): T;
+  on(events: {
+		readonly [eventName: string]: (e: IEvent) => void;
+  }): T;
+  on(
+    eventName: string,
+    handler: (e: IEvent) => void
+  ): T;
 
 	/**
 	 * Stops event observing for a particular event handler. Calling this method
@@ -334,6 +340,9 @@ interface IObservable<T> {
 	 * @param eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': handler, 'selection:cleared': handler})
 	 * @param handler Function to be deleted from EventListeners
 	 */
+	off(events: {
+		readonly [eventName: string]: (e: IEvent) => void;
+	}): T;
 	off(eventName?: string | any, handler?: (e: IEvent) => void): T;
 
 	/**
@@ -1306,12 +1315,12 @@ export class StaticCanvas {
 
 	/**
 	 * Sets zoom level of this canvas instance, zoom centered around point
-	 * @param {fabric.Point} point to zoom with respect to
+	 * @param {fabric.Point | { x: number, y: number }} point to zoom with respect to
 	 * @param {Number} value to set zoom to, less than 1 zooms out
 	 * @return {fabric.Canvas} instance
 	 * @chainable true
 	 */
-	zoomToPoint(point: Point, value: number): Canvas;
+	zoomToPoint(point: Point | { x: number, y: number }, value: number): Canvas;
 
 	/**
 	 * Sets zoom level of this canvas instance
