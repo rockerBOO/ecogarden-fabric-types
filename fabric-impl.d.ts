@@ -7,6 +7,7 @@ export const isLikelyNode: boolean;
 export const isTouchSupported: boolean;
 export const version: string;
 export const iMatrix: number[];
+export let devicePixelRatio: number;
 export let textureSize: number;
 export let copiedText: string;
 export let copiedTextStyle: any[];
@@ -1332,19 +1333,19 @@ export class StaticCanvas {
 
 	/**
 	 * Pan viewport so as to place point at top left corner of canvas
-	 * @param {fabric.Point} point to move to
+	 * @param {fabric.Point | { x: number, y: number }} point to move to
 	 * @return {fabric.Canvas} instance
 	 * @chainable
 	 */
-	absolutePan(point: Point): Canvas;
+	absolutePan(point: Point | { x: number, y: number }): Canvas;
 
 	/**
 	 * Pans viewpoint relatively
-	 * @param {fabric.Point} point (position vector) to move by
+	 * @param {fabric.Point | { x: number, y: number }} point (position vector) to move by
 	 * @return {fabric.Canvas} instance
 	 * @chainable
 	 */
-	relativePan(point: Point): Canvas;
+	relativePan(point: Point | { x: number, y: number }): Canvas;
 
 	/**
 	 * Returns <canvas> element corresponding to this instance
@@ -5916,19 +5917,19 @@ export class PencilBrush extends BaseBrush {
 ///////////////////////////////////////////////////////////////////////////////
 // Fabric util Interface
 //////////////////////////////////////////////////////////////////////////////
-interface IUtilAnimationOptions {
+interface IUtilAnimationOptions<T> {
 	/**
 	 * Starting value
 	 */
-	startValue?: number;
+	startValue?: T;
 	/**
 	 * Ending value
 	 */
-	endValue?: number;
+	endValue?: T;
 	/**
 	 * Value to modify the property by
 	 */
-	byValue?: number;
+	byValue?: T;
 	/**
 	 * Duration of change (in ms)
 	 */
@@ -5936,11 +5937,11 @@ interface IUtilAnimationOptions {
 	/**
 	 * Callback; invoked on every value change
 	 */
-	onChange?: (endValue: number, finished: number, timePercentage: number) => void;
+	onChange?: (currentValue: T, finished: number, timePercentage: number) => void;
 	/**
 	 * Callback; invoked when value change is completed
 	 */
-	onComplete?: (endValue: number, finished: number, timePercentage: number) => void;
+	onComplete?: (endValue: T, finished: number, timePercentage: number) => void;
 	/**
 	 * Easing function
 	 */
@@ -5951,7 +5952,7 @@ interface IUtilAnimation {
 	 * Changes value from one to another within certain period of time, invoking callbacks as value is being changed.
 	 * @param [options] Animation options
 	 */
-	animate(options?: IUtilAnimationOptions): void;
+	animate<T>(options?: IUtilAnimationOptions<T>): void;
 	/**
 	 * requestAnimationFrame polyfill based on http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 	 * In order to get a precise start time, `requestAnimFrame` should be called as an entry into the method
