@@ -4110,7 +4110,7 @@ export class Polyline extends Object {
 	 */
 	constructor(points: Array<{ x: number; y: number }>, options?: IPolylineOptions);
 
-	pathOffset: Point;
+	pathOffset?: Point;
 
 	/**
 	 * Update positions dimensions for the object
