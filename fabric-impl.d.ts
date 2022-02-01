@@ -4073,6 +4073,11 @@ export class Polygon extends Polyline {
 	 * @param [options] Options object
 	 */
 	constructor(points: (Point | { x: number, y: number })[], options?: IPolylineOptions);
+  /**
+   * Used to calculate object's bounding box
+   * @returns {fabric.Point[]} array of size 2n/4n of all suspected points
+   */
+	_projectStrokeOnPoints(): Point[];
 	/**
 	 * Returns Polygon instance from an SVG element
 	 * @param element Element to parse
