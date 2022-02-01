@@ -4106,6 +4106,15 @@ export class Polyline extends Object {
 	pathOffset: Point;
 
 	/**
+	 * Update positions dimensions for the object
+   * @param {object} options 
+   *		{boolean} fromSVG 
+   *		{boolean} left 
+   *		{boolean} top
+	 */
+	_setPositionDimensions(options: { fromSVG?: boolean, left?: boolean, top?: boolean }): void
+
+	/**
 	 * Calculate the polygon min and max point from points array,
 	 * returning an object with left, top, width, height to measure the polygon size
 	 * @private
@@ -4115,6 +4124,13 @@ export class Polyline extends Object {
 	 * @return {Object} object.height distance between Y coordinates of the polygon topmost and bottommost point
 	 */
 	_calcDimensions(): { left: number; top: number; width: number; height: number };
+
+  /**
+   * Returns complexity of an instance
+   * @return {Number} complexity of this instance
+   */
+	complexity(): number
+
 	/**
 	 * List of attribute names to account for when parsing SVG element (used by `fabric.Polygon.fromElement`)
 	 */
