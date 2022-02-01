@@ -4034,7 +4034,7 @@ export class Path {
 	 */
 	constructor(path?: string | Point[], options?: IPathOptions);
 
-	pathOffset: Point | { x: number, y: number };
+	pathOffset?: Point | { x: number, y: number };
 
 	/**
 	 * Returns svg clipPath representation of an instance
