@@ -4034,7 +4034,7 @@ export class Path {
 	 */
 	constructor(path?: string | Point[], options?: IPathOptions);
 
-	pathOffset: Point;
+	pathOffset: Point | { x: number, y: number };
 
 	/**
 	 * Returns svg clipPath representation of an instance
@@ -4097,6 +4097,8 @@ interface IPolylineOptions extends IObjectOptions {
 	 * Points array
 	 */
 	points?: (Point | { x: number, y: number })[];
+
+	pathOffset: Point | { x: number, y: number };
 }
 export interface Polyline extends IPolylineOptions { }
 export class Polyline extends Object {
