@@ -383,9 +383,10 @@ interface ICanvasAnimation<T> {
 	/**
 	 * Same as `fabric.Canvas#remove` but animated
 	 * @param object Object to remove
+	 * @param object onChange or onComplete callbacks
 	 * @chainable
 	 */
-	fxRemove(object: Object): T;
+	fxRemove(object: Object, callbacks?: Callbacks): T;
 
 	/**
 	 * Same as {@link fabric.Canvas.prototype.straightenObject}, but animated
@@ -4034,7 +4035,7 @@ export class Path {
 	 */
 	constructor(path?: string | Point[], options?: IPathOptions);
 
-	pathOffset?: Point | { x: number, y: number };
+	pathOffset: Point | { x: number, y: number };
 
 	/**
 	 * Returns svg clipPath representation of an instance
@@ -4067,6 +4068,8 @@ export class Path {
 }
 export interface Polygon extends IPolylineOptions { }
 export class Polygon extends Polyline {
+	pathOffset: Point | { x: number, y: number };
+
 	/**
 	 * Constructor
 	 * @param points Array of points
@@ -4109,8 +4112,6 @@ export class Polyline extends Object {
 	 * @param [skipOffset] Whether points offsetting should be skipped
 	 */
 	constructor(points: Array<{ x: number; y: number }>, options?: IPolylineOptions);
-
-	pathOffset?: Point;
 
 	/**
 	 * Update positions dimensions for the object
