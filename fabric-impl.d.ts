@@ -4098,7 +4098,7 @@ interface IPolylineOptions extends IObjectOptions {
 	 */
 	points?: (Point | { x: number, y: number })[];
 
-	pathOffset?: Point | { x: number, y: number };
+	// pathOffset?: Point | { x: number, y: number };
 }
 export interface Polyline extends IPolylineOptions { }
 export class Polyline extends Object {
@@ -4110,7 +4110,7 @@ export class Polyline extends Object {
 	 */
 	constructor(points: Array<{ x: number; y: number }>, options?: IPolylineOptions);
 
-	pathOffset?: Point;
+	// pathOffset?: Point;
 
 	/**
 	 * Update positions dimensions for the object
