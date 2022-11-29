@@ -2065,6 +2065,13 @@ export class Canvas {
 	 */
 	discardActiveObject(e?: Event): Canvas;
 	/**
+	 * Discard the active object without firing events
+	 * @param {event} e
+	 * @return {fabric.Canvas} thisArg
+	 * @chainable
+	 */
+	_discardActiveObject(e?: Event): Canvas;
+	/**
 	 * Clears a canvas element and removes all event listeners
 	 * @return {fabric.Canvas} thisArg
 	 * @chainable
