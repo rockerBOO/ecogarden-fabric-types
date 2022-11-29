@@ -1213,7 +1213,7 @@ export class StaticCanvas {
 	 */
 	constructor(element: HTMLCanvasElement | string | null, options?: ICanvasOptions);
 
-	_activeObject?: Object | Group;
+	_activeObject?: Object | Group | null;
 
 	freeDrawingBrush: FreeDrawingBrush;
 
@@ -1939,7 +1939,7 @@ export class Canvas {
 	 * @default
 	 */
 	skipTargetFind: boolean;
-	_activeObject: Object;
+	_activeObject: Object | null;
 	_objects: Object[];
 	targets: Object[];
 	/**
