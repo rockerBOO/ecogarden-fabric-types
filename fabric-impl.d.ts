@@ -2055,6 +2055,17 @@ export class Canvas {
 	 */
 	setActiveObject(object: Object, e?: Event): Canvas;
 	/**
+	 * This is a private method for now.
+	 * This is supposed to be equivalent to setActiveObject but without firing
+	 * any event. There is commitment to have this stay this way.
+	 * This is the functional part of setActiveObject.
+	 * @private
+	 * @param {Object} object to set as active
+	 * @param {Event} [e] Event (passed along when firing "object:selected")
+	 * @return {Boolean} true if the selection happened
+	 */
+	_setActiveObject(object: Object, e?: Event): Canvas;
+	/**
 	 * Discards currently active object and fire events. If the function is called by fabric
 	 * as a consequence of a mouse event, the event is passed as a parameter and
 	 * sent to the fire function for the custom events. When used as a method the
