@@ -3255,6 +3255,12 @@ export class Object {
 	 */
 	toString(): string;
 
+  /**
+   * Returns a JSON representation of an instance
+   * @return {Object} JSON
+   */
+	toJSON(): object;
+
 	/**
 	 * Return the object scale factor counting also the group scaling
 	 * @return {Object} object with scaleX and scaleY properties
