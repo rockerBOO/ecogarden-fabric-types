@@ -2304,7 +2304,6 @@ export class Ellipse {
 	static fromObject(object: object): Ellipse;
 }
 interface IGroupOptions extends IObjectOptions {
-	type?: "group"
 	/**
 	 * Indicates if click, mouseover, mouseout events & hoverCursor should also check for subtargets
 	 * @type Boolean
