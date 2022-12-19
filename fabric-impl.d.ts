@@ -4090,7 +4090,9 @@ export class Path {
 	 */
 	static ATTRIBUTE_NAMES: string[];
 }
-export interface Polygon extends IPolylineOptions { }
+export interface Polygon extends IPolylineOptions { 
+	type?: "polygon"
+}
 export class Polygon extends Polyline {
 	pathOffset: Point | { x: number, y: number };
 
