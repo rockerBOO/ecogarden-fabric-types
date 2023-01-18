@@ -3,10 +3,12 @@
 
 export as namespace fabric;
 
+export type TMat2D = [number, number, number, number, number, number];
+
 export const isLikelyNode: boolean;
 export const isTouchSupported: boolean;
 export const version: string;
-export const iMatrix: number[];
+export const iMatrix: TMat2D;
 export let devicePixelRatio: number;
 export let textureSize: number;
 export let copiedText: string;
@@ -3819,13 +3821,13 @@ export class Object {
 	 * @param {Boolean} [skipGroup] return transformMatrix for object and not go upward with parents
 	 * @return {Array} matrix Transform Matrix for the object
 	 */
-	calcTransformMatrix(skipGroup?: boolean): number[];
+	calcTransformMatrix(skipGroup?: boolean): TMat2D;
 	/**
 	 * calculate transform matrix that represents the current transformations from the
 	 * object's properties, this matrix does not include the group transformation
 	 * @return {Array} transform matrix for the object
 	 */
-	calcOwnMatrix(): number[];
+	calcOwnMatrix(): TMat2D;
 	/**
 	 * return correct set of coordinates for intersection
 	 */
@@ -4084,7 +4086,9 @@ export class Path {
 	 */
 	static ATTRIBUTE_NAMES: string[];
 }
-export interface Polygon extends IPolylineOptions { }
+export interface Polygon extends IPolylineOptions { 
+	type?: "polygon"
+}
 export class Polygon extends Polyline {
 	pathOffset: Point | { x: number, y: number };
 
@@ -6325,7 +6329,7 @@ interface IUtilMisc {
 	 * Invert transformation t
 	 * @param t The transform
 	 */
-	invertTransform(t: number[]): number[];
+	invertTransform(t: TMat2D): TMat2D;
 
 	/**
 	 * A wrapper around Number#toFixed, which contrary to native method returns number, not string.
@@ -6449,7 +6453,7 @@ interface IUtilMisc {
 	 * @param  {Boolean} is2x2 flag to multiply matrices as 2x2 matrices
 	 * @return {Array} The product of the two transform matrices
 	 */
-	multiplyTransformMatrices(a: readonly number[], b: readonly number[], is2x2?: boolean): readonly number[];
+	multiplyTransformMatrices(a: TMat2D, b: TMat2D, is2x2?: boolean): TMat2D;
 
 	/**
 	 * Decomposes standard 2x2 matrix into transform componentes
@@ -6457,15 +6461,7 @@ interface IUtilMisc {
 	 */
 	qrDecompose(
 		a: number[],
-	): {
-		angle: number;
-		scaleX: number;
-		scaleY: number;
-		skewX: number;
-		skewY: number;
-		translateX: number;
-		translateY: number;
-	};
+	): TQrDecomposeOut;
 
 	/**
 	 * Extract Object transform values
@@ -6514,7 +6510,7 @@ interface IUtilMisc {
 		skewY: number;
 		translateX: number;
 		translateY: number;
-	}): number[];
+	}): TMat2D;
 
 	/**
 	 * Returns string representation of function body
@@ -6893,3 +6889,41 @@ export interface Transform {
 	theta: number;
 	width: number;
 }
+
+interface NominalTag<T> {
+	nominalTag?: T;
+}
+
+type Nominal<Type, Tag> = NominalTag<Tag> & Type;
+
+export enum Degree {}
+export enum Radian {}
+
+export type TDegree = Nominal<number, Degree>;
+export type TRadian = Nominal<number, Radian>;
+
+type TRotateMatrixArgs = {
+	angle?: TDegree;
+};
+
+type TTranslateMatrixArgs = {
+	translateX?: number;
+	translateY?: number;
+};
+
+export type TScaleMatrixArgs = {
+	scaleX?: number;
+	scaleY?: number;
+	flipX?: boolean;
+	flipY?: boolean;
+	skewX?: TDegree;
+	skewY?: TDegree;
+};
+
+export type TComposeMatrixArgs = TTranslateMatrixArgs &
+	TRotateMatrixArgs &
+	TScaleMatrixArgs;
+
+export type TQrDecomposeOut = Required<
+	Omit<TComposeMatrixArgs, "flipX" | "flipY">
+>;
