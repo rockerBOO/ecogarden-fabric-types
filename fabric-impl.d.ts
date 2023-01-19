@@ -1130,7 +1130,7 @@ interface IStaticCanvasOptions {
 	/**
 	 * The transformation (in the format of Canvas transform) which focuses the viewport
 	 */
-	viewportTransform?: number[];
+	viewportTransform?: TMat2D;
 	/**
 	 * if set to false background image is not affected by viewport transform
 	 * @since 1.6.3
@@ -1315,7 +1315,7 @@ export class StaticCanvas {
 	 * @return {fabric.Canvas} instance
 	 * @chainable
 	 */
-	setViewportTransform(vpt: number[]): Canvas;
+	setViewportTransform(vpt: Readonly<TMat2D>): Canvas;
 
 	/**
 	 * Sets zoom level of this canvas instance, zoom centered around point
@@ -6335,7 +6335,7 @@ interface IUtilMisc {
 	 * Invert transformation t
 	 * @param t The transform
 	 */
-	invertTransform(t: TMat2D): TMat2D;
+	invertTransform(t: Readonly<TMat2D>): TMat2D;
 
 	/**
 	 * A wrapper around Number#toFixed, which contrary to native method returns number, not string.
@@ -6466,7 +6466,7 @@ interface IUtilMisc {
 	 * @param a transformMatrix
 	 */
 	qrDecompose(
-		a: number[],
+		a: Readonly<TMat2D>,
 	): TQrDecomposeOut;
 
 	/**
