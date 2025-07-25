@@ -303,22 +303,76 @@ interface ICollection<T> {
    */
   remove(...object: Object[]): T;
 
-  /**
-   * Executes given function for each object in this group
-   * @param context Context (aka thisObject)
-   * @return thisArg
-   */
-  forEachObject(
-    callback: (element: Object, index: number, array: Object[]) => void,
-    context?: any,
+	/**
+	 * Executes given function for each object in this group
+	 * @param context Context (aka thisObject)
+	 * @return thisArg
+	 */
+	forEachObject(callback: (element: Object, index: number, array: Object[]) => void, context?: any): T;
+
+	/**
+	 * Returns an array of children objects of this instance
+	 * Type parameter introduced in 1.3.10
+	 * @param [type] When specified, only objects of this type are returned
+	 */
+	getObjects(type?: string): Object[];
+
+	/**
+	 * Returns object at specified index
+	 * @return thisArg
+	 */
+	item(index: number): T;
+
+	/**
+	 * Returns true if collection contains no objects
+	 * @return true if collection is empty
+	 */
+	isEmpty(): boolean;
+
+	/**
+	 * Returns a size of a collection (i.e: length of an array containing its objects)
+	 * @return Collection size
+	 */
+	size(): number;
+
+	/**
+	 * Returns true if collection contains an object
+	 * @param object Object to check against
+	 * @return `true` if collection contains an object
+	 */
+	contains(object: Object): boolean;
+
+	/**
+	 * Returns number representation of a collection complexity
+	 * @return complexity
+	 */
+	complexity(): number;
+}
+
+interface IObservable<T> {
+	/**
+	 * Observes specified event
+	 * @param eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': handler, 'selection:cleared': handler})
+	 * @param handler Function that receives a notification when an event of the specified type occurs
+	 */
+  on<E extends IEvent>(events: {
+		readonly [eventName: string]: (e: E) => void;
+  }): T;
+  on<E extends IEvent>(
+    eventName: string,
+    handler: (e: E) => void
   ): T;
 
-  /**
-   * Returns an array of children objects of this instance
-   * Type parameter introduced in 1.3.10
-   * @param [type] When specified, only objects of this type are returned
-   */
-  getObjects(type?: string): Object[];
+	/**
+	 * Stops event observing for a particular event handler. Calling this method
+	 * without arguments removes all handlers for all events
+	 * @param eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': handler, 'selection:cleared': handler})
+	 * @param handler Function to be deleted from EventListeners
+	 */
+	off<E extends IEvent>(events: {
+		readonly [eventName: string]: (e: E) => void;
+	}): T;
+	off<E extends IEvent>(eventName?: string | any, handler?: (e: E) => void): T;
 
   /**
    * Returns object at specified index
@@ -2872,6 +2926,9 @@ export class Line {
    */
   calcLinePoints(): { x1: number; x2: number; y1: number; y2: number };
 }
+
+export type OriginX = "left" | "right" | "center" | number;
+export type OriginY = "top" | "bottom" | "center"| number;
 
 interface IObjectOptions {
   /**
