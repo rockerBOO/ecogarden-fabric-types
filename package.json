@@ -78,9 +78,5 @@
     "directory": "types/fabric"
   },
   "scripts": {},
-  "dependencies": {},
-  "typeScriptVersion": "3.5",
-  "devDependencies": {
-    "prettier_d_slim": "^1.0.0"
-  }
+  "dependencies": {}
 }
