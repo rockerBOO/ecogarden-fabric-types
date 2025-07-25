@@ -329,12 +329,12 @@ interface IObservable<T> {
 	 * @param eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': handler, 'selection:cleared': handler})
 	 * @param handler Function that receives a notification when an event of the specified type occurs
 	 */
-  on(events: {
-		readonly [eventName: string]: (e: IEvent) => void;
+  on<E extends IEvent>(events: {
+		readonly [eventName: string]: (e: E) => void;
   }): T;
-  on(
+  on<E extends IEvent>(
     eventName: string,
-    handler: (e: IEvent) => void
+    handler: (e: E) => void
   ): T;
 
 	/**
@@ -343,10 +343,10 @@ interface IObservable<T> {
 	 * @param eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': handler, 'selection:cleared': handler})
 	 * @param handler Function to be deleted from EventListeners
 	 */
-	off(events: {
-		readonly [eventName: string]: (e: IEvent) => void;
+	off<E extends IEvent>(events: {
+		readonly [eventName: string]: (e: E) => void;
 	}): T;
-	off(eventName?: string | any, handler?: (e: IEvent) => void): T;
+	off<E extends IEvent>(eventName?: string | any, handler?: (e: E) => void): T;
 
 	/**
 	 * Fires event with an optional options object
@@ -2702,6 +2702,9 @@ export class Line {
 	 */
 	calcLinePoints(): { x1: number; x2: number; y1: number; y2: number };
 }
+
+export type OriginX = "left" | "right" | "center" | number;
+export type OriginY = "top" | "bottom" | "center"| number;
 
 interface IObjectOptions {
 	/**
@@ -6785,6 +6788,9 @@ export class Control {
 	 * @default null
 	 */
 	stroke: string | null;
+
+
+	strokeDashArray: string | null;
 
 	/**
 	 * If controls has an offsetY or offsetX, draw a line that connects
